@@ -100,21 +100,23 @@ export default function TopicPage({
               Back to Dashboard
             </button>
             <div className="sidebar-topic-name">{topic.name}</div>
-            <div className="sidebar-topic-actions">
-              <button className="btn btn-ghost btn-icon btn-sm" title="Rename topic"
-                onClick={() => { const n = prompt('Rename:', topic.name); if (n?.trim()) onRenameTopic(topic.id, n.trim()); }}>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-                </svg>
-              </button>
-              <button className="btn btn-ghost btn-icon btn-sm" title="Delete topic" style={{ color: '#f87171' }}
-                onClick={() => { if (window.confirm(`Delete "${topic.name}"?`)) { onDeleteTopic(topic.id); navigate('/dashboard'); } }}>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="3 6 5 6 21 6"/>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                </svg>
-              </button>
-            </div>
+            {!/\d/.test(topic.id) ? null : (
+              <div className="sidebar-topic-actions">
+                <button className="btn btn-ghost btn-icon btn-sm" title="Rename topic"
+                  onClick={() => { const n = prompt('Rename:', topic.name); if (n?.trim()) onRenameTopic(topic.id, n.trim()); }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                  </svg>
+                </button>
+                <button className="btn btn-ghost btn-icon btn-sm" title="Delete topic" style={{ color: '#f87171' }}
+                  onClick={() => { if (window.confirm(`Delete "${topic.name}"?`)) { onDeleteTopic(topic.id); navigate('/dashboard'); } }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="sidebar-body">
